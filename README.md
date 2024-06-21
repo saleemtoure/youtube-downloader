@@ -1,7 +1,7 @@
 
 # YouTube Downloader
 
-A simple YouTube GUI video downloader
+A simple YouTube GUI video downloader that let's you download video and audio in different resolutions
 
 
 
