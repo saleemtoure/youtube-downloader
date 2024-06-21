@@ -7,7 +7,7 @@ A simple YouTube GUI video downloader that let's you download video and audio in
 
 ## Screenshots
 
-![Screenshots](https://github.com/saleemtoure/python-GUI/blob/main/youtube-downloader/screenshots.png)
+![Screenshots](https://github.com/saleemtoure/youtube-downloader/blob/main/screenshots.png)
 
 ## Features
 
