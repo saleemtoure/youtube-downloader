@@ -5,7 +5,7 @@ A simple YouTube GUI video downloader that let's you download video and audio in
 
 ## Executable
 
-[Click here to download source code](https://github.com/saleemtoure/youtube-downloader/archive/refs/tags/v0.1.zip)
+[Click here to download source code](https://github.com/saleemtoure/youtube-downloader/archive/refs/tags/v1.0.zip)
 
 
 ## Screenshots
