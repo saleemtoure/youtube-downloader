@@ -3,8 +3,6 @@
 
 A simple YouTube GUI video downloader that let's you download video and audio in different resolutions
 
-
-
 ## Screenshots
 
 ![Screenshots](https://github.com/saleemtoure/youtube-downloader/blob/main/screenshots.png)
@@ -24,3 +22,5 @@ A simple YouTube GUI video downloader that let's you download video and audio in
 - Moviepy (External, for mixing video and audio at higher resolutions )
 - Os (Internal, for path management)
 - sv_ttk (External, Sun Valley ttk theme for GUI)
+
+*A whole year of commit history lost due to deletion of the original repository
