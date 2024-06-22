@@ -3,6 +3,8 @@
 
 A simple YouTube GUI video downloader that let's you download video and audio in different resolutions
 
+**Broken as of 22.06.24. Fix in progress
+
 ## Screenshots
 
 ![Screenshots](https://github.com/saleemtoure/youtube-downloader/blob/main/screenshots.png)
