@@ -9,6 +9,9 @@ from proglog import ProgressBarLogger
 
 
 desktop_path = os.path.normpath(os.path.expanduser("~/Desktop"))
+program_folder_path = os.path.realpath(
+    os.path.join(os.getcwd(), os.path.dirname(__file__))
+)
 
 
 # *********************************************** Code mostly from Stack Overflow (with small modifications)
@@ -66,30 +69,41 @@ def download_media(video_url, media_type, video_quality):
         if media_type == "Audio":
             yt = YouTube(video_url, on_progress_callback=on_progress)
             file = yt.streams.get_audio_only()
-            file.download()
+            if file is not None:
+                file.download()
 
-            audio_mp4_file = AudioFileClip(f"{file.title}.mp4")
-            audio_mp4_file.write_audiofile(f"{out_path}/{file.title}.mp3")
+                audio_mp4_file = AudioFileClip(
+                    f"{program_folder_path}/{file.title}.mp4"
+                )
+                audio_mp4_file.write_audiofile(f"{out_path}/{file.title}.mp3")
 
-            if os.path.exists(f"{file.title}.mp4"):
-                os.remove(f"{file.title}.mp4")
-                on_finish()
-            else:
-                "Error when deleting converted files"
+                if os.path.exists(f"{program_folder_path}/{file.title}.mp4"):
+                    os.remove(f"{program_folder_path}/{file.title}.mp4")
+                    on_finish()
+                else:
+                    "Error when deleting converted files"
 
         elif video_quality == "720p":
             yt = YouTube(video_url, on_progress_callback=on_progress)
             file = yt.streams.filter(
                 res="720p", mime_type="video/mp4", progressive=True
             ).first()
-            file.download(filename=f"{out_path}/{video_title}(720p).mp4")
-            on_finish()
 
-        else:
-            yt.streams.get_audio_only().download(
-                filename="audio.mp3", skip_existing=False
-            )
-            audio = CompositeAudioClip([AudioFileClip("audio.mp3")])
+            if file is not None:
+                file.download(filename=f"{out_path}/{video_title}(720p).mp4")
+                on_finish()
+
+        else:  # Videoer over 720p lastes ned annderledes
+            audiofile = yt.streams.get_audio_only()
+            if audiofile is not None:
+                audiofile.download(
+                    filename="audio.mp3",
+                    skip_existing=False,
+                    output_path=program_folder_path,
+                )
+                audio = CompositeAudioClip(
+                    [AudioFileClip(f"{program_folder_path}/audio.mp3")]
+                )
 
             if video_quality == "Highest":
                 yt = YouTube(video_url, on_progress_callback=on_progress)
@@ -99,21 +113,27 @@ def download_media(video_url, media_type, video_quality):
                     .desc()
                     .first()
                 )
-                file.download(
-                    filename="video.mp4", output_path=out_path, skip_existing=False
-                )
 
-                video = VideoFileClip("video.mp4")
+                if file is not None:
+                    file.download(
+                        filename="video.mp4",
+                        skip_existing=False,
+                        output_path=program_folder_path,
+                    )
+
+                video = VideoFileClip(f"{program_folder_path}/video.mp4")
                 video.audio = audio
                 progress2_label.pack(padx=10, pady=10)
                 video.write_videofile(
-                    f"{out_path}/{video_title}({yt.streams.filter(adaptive=True).order_by('resolution').desc().first().resolution}).mp4",
+                    f"{out_path}/{video_title} ({yt.streams.filter(adaptive=True).order_by('resolution').desc().first().resolution}).mp4",
                     logger=MyLogger(),
                 )
 
-                if os.path.exists(f"video.mp4") and os.path.exists("audio.mp3"):
-                    os.remove("video.mp4")
-                    os.remove("audio.mp3")
+                if os.path.exists(
+                    f"{program_folder_path}/video.mp4"
+                ) and os.path.exists(f"{program_folder_path}/audio.mp3"):
+                    os.remove(f"{program_folder_path}/video.mp4")
+                    os.remove(f"{program_folder_path}/audio.mp3")
                     on_finish()
                 else:
                     "Error when deleting merged files"
@@ -121,26 +141,31 @@ def download_media(video_url, media_type, video_quality):
             elif video_quality == "1080p":
                 yt = YouTube(video_url, on_progress_callback=on_progress)
                 file = (
-                    yt.streams.filter(res="1080p", mime_type="video/mp4", adaptive=True)
+                    yt.streams.filter(res="1080p", mime_type="video/mp4")
                     .order_by("resolution")
                     .desc()
                     .first()
                 )
 
-                file.download(
-                    filename="video.mp4", output_path=out_path, skip_existing=False
-                )
+                if file is not None:
+                    file.download(
+                        filename="video.mp4",
+                        output_path=program_folder_path,
+                        skip_existing=False,
+                    )
 
-                video = VideoFileClip("video.mp4")
+                video = VideoFileClip(f"{program_folder_path}/video.mp4")
                 video.audio = audio
                 progress2_label.pack(padx=10, pady=10)
                 video.write_videofile(
-                    f"{out_path}/{video_title}(1080p).mp4", logger=MyLogger()
+                    f"{out_path}/{video_title} (1080p).mp4", logger=MyLogger()
                 )
 
-                if os.path.exists(f"video.mp4") and os.path.exists("audio.mp3"):
-                    os.remove("video.mp4")
-                    os.remove("audio.mp3")
+                if os.path.exists(
+                    f"{program_folder_path}/video.mp4"
+                ) and os.path.exists(f"{program_folder_path}/audio.mp3"):
+                    os.remove(f"{program_folder_path}/video.mp4")
+                    os.remove(f"{program_folder_path}/audio.mp3")
                     on_finish()
                 else:
                     "Error when deleting merged files"
