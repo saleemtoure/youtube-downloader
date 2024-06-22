@@ -3,7 +3,7 @@
 
 A simple YouTube GUI video downloader that let's you download video and audio in different resolutions
 
-**Broken as of 22.06.24. Fix in progress
+**Will be rewritten with yt-dlp as Pytube is quite slow (v2.0 coming soon...)
 
 ## Screenshots
 
