@@ -1,0 +1,5 @@
+moviepy==1.0.3
+proglog==0.1.10
+pytube==15.0.0
+regex==2024.5.15
+sv_ttk==2.5.5
