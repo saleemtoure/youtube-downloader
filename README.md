@@ -12,8 +12,8 @@ A simple YouTube GUI video downloader that let's you download video and audio in
 ## Features
 
 - Light/dark mode toggle
-- Download video with audio (Highest quality, 1080p, 720p)
-- Only download the audio (Highest quality available)
+- Download video with audio 
+- Only download the audio 
 
 
 ## Modules
