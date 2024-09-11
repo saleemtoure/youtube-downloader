@@ -1,7 +1,9 @@
 import os
 import regex as re
-from pytube import YouTube
-import pytube.exceptions as pte
+from pytubefix import YouTube
+# from pytube import YouTube
+import pytubefix.exceptions as pte
+# import pytube.exceptions as pte
 from moviepy.editor import AudioFileClip, VideoFileClip, CompositeAudioClip
 import tkinter as tk
 from tkinter import NORMAL, ttk, messagebox, filedialog
